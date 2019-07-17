@@ -1,20 +1,20 @@
-<header id='header'>
+<header id="header">
 
-  <h1 id='logo'>Fixed Expenses</h1>
+  <h1 id="logo">Fixed Expenses</h1>
 
-  <form id='add-account'>
-    {{input type=text value=accountName placeholder='account name'}}
-    <button {{action 'addAccount'}}> Add Account </button>
+  <form id="add-account">
+    {{input type=text value=accountName placeholder="account name"}}
+    <button {{action "addAccount"}}> Add Account </button>
   </form>
 
 </header>
 
 <main>
 
-  <table id='projections'>
+  <table id="projections">
     <thead>
       <tr>
-        <th class='name'> Account </th>
+        <th class="name"> Account </th>
         {{#each months as |month|}}
           <th> month {{month}} </th>
         {{/each}}
@@ -23,9 +23,9 @@
     <tbody>
       {{#each model.accounts as |account|}}
         <tr>
-          <td class='name'>{{account.name}}</td>
+          <td class="name">{{account.name}}</td>
           {{#each months as |month|}}
-            <td class={{incomeExpense (product account.total month)}}>
+            <td class={{income-expense (product account.total month)}}>
               $ {{product account.total month}}
             </td>
           {{/each}}
@@ -34,17 +34,17 @@
     </tbody>
   </table>
 
-  <section id='new-item'>
+  <section id="new-item">
     <form>
-    <select onchange={{action (mut itemAccountId) value='target.value'}}>
+      <select onchange={{action (mut itemAccountId) value="target.value"}}>
         {{#each model.accounts as |account|}}
           <option value={{account.id}} selected={{eq account.id itemAccountId }}>
             {{account.name}}
           </option>
         {{/each}}
       </select>
-      {{input class='name' type=text value=itemName placeholder='Item Name'}}
-      <select onchange={{action (mut transferAccountId) value='target.value'}}>
+      {{input class="name" type=text value=itemName placeholder="Item Name"}}
+      <select onchange={{action (mut transferAccountId) value="target.value"}}>
         <option >No Transfer</option>
         {{#each model.accounts as |account|}}
           <option value={{account.id}} selected={{eq account.id transferAccountId }}>
@@ -52,61 +52,61 @@
           </option>
         {{/each}}
       </select>
-      {{input class='amount' type='number' value=itemAmount placeholder='Amt/Month'}}
-      <button {{action 'add'}}> Add </button>
+      {{input class="amount" type="number" value=itemAmount placeholder="Amt/Month"}}
+      <button {{action "add"}}> Add </button>
     </form>
   </section>
 
-  <section id='accounts'>
-  {{#each model.accounts as |account|}}
-    <article class='account'>
+  <section id="accounts">
+    {{#each model.accounts as |account|}}
+      <article class="account">
 
-      <header>
-        <h2>
-          {{account.name}}
-          <span> $ {{account.total}} </span>
-        </h2>
-      </header>
+        <header>
+          <h2>
+            {{account.name}}
+            <span> $ {{account.total}} </span>
+          </h2>
+        </header>
 
-      <form class='add-item'>
-        {{input class='name' type=text value=account.itemName placeholder='Item Name'}}
-        {{input class='amount' type='number' value=account.itemAmount placeholder='Amt/Month'}}
-        <button {{action 'addItem' account}}> add </button>
-      </form>
+        <form class="add-item">
+          {{input class="name" type=text value=account.itemName placeholder="Item Name"}}
+          {{input class="amount" type="number" value=account.itemAmount placeholder="Amt/Month"}}
+          <button {{action "addItem" account}}> add </button>
+        </form>
 
-      <table>
-        <tbody>
-          {{#each account.orderedItems as |item|}}
-            {{#account-item model=item account=account as |accountItem|}}
-              <td class='name'> {{accountItem.model.name}} </td>
-              <td class='amount'> {{accountItem.amount}} </td>
-            {{/account-item}}
-          {{/each}}
-        </tbody>
-      </table>
+        <table>
+          <tbody>
+            {{#each account.orderedItems as |item|}}
+              {{#account-item model=item account=account as |accountItem|}}
+                <td class="name"> {{accountItem.model.name}} </td>
+                <td class="amount"> {{accountItem.amount}} </td>
+              {{/account-item}}
+            {{/each}}
+          </tbody>
+        </table>
 
-      <div class='subtotal'>
-        <span class='income'>$ {{account.allIncome}}</span>
-        /<span class='expense'>$ {{account.allExpenses}}</span>
-      </div>
+        <div class="subtotal">
+          <span class="income">$ {{account.allIncome}}</span>
+          /<span class="expense">$ {{account.allExpenses}}</span>
+        </div>
 
-      <table>
-        <tbody>
-          {{#each account.deletedItems as |item|}}
-            {{#account-item model=item account=account as |accountItem|}}
-              <td class='name'> {{accountItem.model.name}} </td>
-              <td class='amount'> 
-                {{accountItem.amount}}
-                -
-                <a class='delete' {{action 'deleteItem' item}}>(x)</a>
-              </td>
-            {{/account-item}}
-          {{/each}}
-        </tbody>
-      </table>
+        <table>
+          <tbody>
+            {{#each account.deletedItems as |item|}}
+              {{#account-item model=item account=account as |accountItem|}}
+                <td class="name"> {{accountItem.model.name}} </td>
+                <td class="amount"> 
+                  {{accountItem.amount}}
+                  -
+                  <button class="delete" {{action "deleteItem" item}}>(x)</button>
+                </td>
+              {{/account-item}}
+            {{/each}}
+          </tbody>
+        </table>
 
-    </article>
-  {{/each}}
+      </article>
+    {{/each}}
   </section>
 
 </main>

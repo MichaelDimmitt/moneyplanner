@@ -1,9 +1,9 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
+import { computed } from '@ember/object';
+import { readOnly } from '@ember/object/computed';
 
-const { computed, computed: { readOnly } } = Ember;
-
-export default Ember.Controller.extend({
-  months: [ 1,2,3,4,5,6,7,8,9,11,12],
+export default Controller.extend({
+  months: Object.freeze([ 1,2,3,4,5,6,7,8,9,11,12 ]),
   accounts: readOnly('model.accounts'),
   account: computed('accountId', function() {
     return this.store.peekRecord('account', this.get('accountId'));
