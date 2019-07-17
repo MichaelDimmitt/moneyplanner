@@ -25,7 +25,7 @@
         <tr>
           <td class="name">{{account.name}}</td>
           {{#each months as |month|}}
-            <td class={{incomeExpense (product account.total month)}}>
+            <td class={{income-expense (product account.total month)}}>
               $ {{product account.total month}}
             </td>
           {{/each}}
