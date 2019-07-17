@@ -1,9 +1,0 @@
-{
-  "name": "moneyplanner",
-  "dependencies": {
-    "ember": "~2.9.0",
-    "ember-cli-shims": "0.1.3",
-    "node-uuid": "1.4.1",
-    "blob-polyfill": "^1.0.20150320"
-  }
-}
