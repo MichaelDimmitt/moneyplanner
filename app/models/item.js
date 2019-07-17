@@ -1,8 +1,8 @@
+import { computed } from '@ember/object';
+import { lt, gt } from '@ember/object/computed';
 import DS from 'ember-data';
-import Ember from 'ember';
 
 const { attr, belongsTo } = DS;
-const { computed, computed: { gt, lt }} = Ember;
 
 export default DS.Model.extend({
   deleted: attr('boolean', { defaultValue: false }),

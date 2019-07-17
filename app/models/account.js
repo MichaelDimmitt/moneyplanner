@@ -1,8 +1,8 @@
+import { computed } from '@ember/object';
+import { sort, mapBy, sum, filterBy } from '@ember/object/computed';
 import DS from 'ember-data';
-import Ember from 'ember';
 
 const { attr, hasMany } = DS;
-const { computed, computed: { filterBy, sum, mapBy, sort } } = Ember;
 
 export default DS.Model.extend({
 
